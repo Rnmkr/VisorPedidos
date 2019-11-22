@@ -55,7 +55,6 @@ namespace VisorPedidos
             try
             {
                 string configPath = Path.Combine(Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString(), "VisorPedidos.xml");
-                MessageBox.Show(configPath);
 
                 XDocument xml = XDocument.Load(configPath);
                 IEnumerable<XElement> config = xml.Root.Elements();
