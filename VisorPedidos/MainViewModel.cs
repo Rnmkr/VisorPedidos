@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
@@ -53,8 +54,9 @@ namespace VisorPedidos
         {
             try
             {
-                string configPath = Path.Combine(@"D:\Dropbox\repos\VisorPedidos\VisorPedidos\bin\Debug\VisorPedidos.xml"); //cambiar a currentdirectory antes de compilar
-               
+                string configPath = Path.Combine(Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString(), "VisorPedidos.xml");
+                MessageBox.Show(configPath);
+
                 XDocument xml = XDocument.Load(configPath);
                 IEnumerable<XElement> config = xml.Root.Elements();
                 _lineasConfiguradas = new List<string>();
