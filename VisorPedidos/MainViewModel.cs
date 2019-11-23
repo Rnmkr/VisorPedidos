@@ -191,8 +191,6 @@ namespace VisorPedidos
             {
                 _timer.Stop();
             }
-
-            ActualizarPantalla();
         }
 
         /// <summary>
