@@ -11,6 +11,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
+using System.Windows.Threading;
 using System.Xml.Linq;
 using VisorDataLibrary;
 
@@ -146,10 +147,14 @@ namespace VisorPedidos
                 {
                     MessageBox.Show("Error en cliente UDP." + Environment.NewLine + "La aplicación se cerrará."
                          + Environment.NewLine + e.ToString(), "Visor de Pedidos", MessageBoxButton.OK, MessageBoxImage.Error);
-                    Application.Current.Shutdown();
 
+                    Dispatcher.CurrentDispatcher.Invoke(() =>
+                    {
+                        Application.Current.Shutdown(); //no funciona
+                    });
                 }
             });
+
         }
 
         /// <summary>
@@ -176,11 +181,19 @@ namespace VisorPedidos
 
             _listaFiltrada.RemoveAll(r => r.PedidoEnProduccion == _datosRecibidos.PedidoAnterior);
 
-            _listaFiltrada.RemoveAll(r => r.PedidoEnProduccion == _datosRecibidos.PedidoEnProduccion);
+            var updateableData = _listaFiltrada.FirstOrDefault(r => r.PedidoEnProduccion == _datosRecibidos.PedidoEnProduccion);
 
-            _listaFiltrada.Add(_datosRecibidos);
+            if (updateableData != null)
+            {
+                _listaFiltrada[_listaFiltrada.IndexOf(updateableData)] = _datosRecibidos;
+            }
+            else
+            {
+                _listaFiltrada.Add(_datosRecibidos);
+            }
                      
             if (_listaFiltrada == null) return;
+
 
             if (_listaFiltrada.Count > 1)
             {
