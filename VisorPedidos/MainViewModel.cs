@@ -50,11 +50,17 @@ namespace VisorPedidos
             }
         }
 
+        public string VersionAplicacion
+        {
+            get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
+        }
+
         private void CargarConfiguracion()
         {
             try
             {
                 string configPath = Path.Combine(Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString(), "VisorPedidos.xml");
+                //string configPath = @"C:\Users\Rnmkr\Dropbox\repos\VisorPedidos\VisorPedidos\bin\Debug\VisorPedidos.xml"; //solo en design
 
                 XDocument xml = XDocument.Load(configPath);
                 IEnumerable<XElement> config = xml.Root.Elements();
@@ -86,8 +92,9 @@ namespace VisorPedidos
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error Cargando los valores iniciales." + Environment.NewLine + "No se puede iniciar."
+                MessageBox.Show("Error cargando los valores iniciales." + Environment.NewLine + "No se puede iniciar la aplicación."
                      + Environment.NewLine + e.ToString(), "Visor de Pedidos", MessageBoxButton.OK, MessageBoxImage.Error);
+
                 Application.Current.Shutdown();
             }
         }
@@ -95,23 +102,33 @@ namespace VisorPedidos
         /// <summary>
         /// Inicia la recepcion de paquetes UDP.
         /// </summary>
-        private async Task IniciarClienteUDP()
+        private async void IniciarClienteUDP()
         {
             await Task.Run(() =>
             {
-                IPAddress multicastIP = IPAddress.Parse(_ipMulticast);
-                IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, Int32.Parse(_puerto));
-                UdpClient udpClient = new UdpClient();
-                udpClient.ExclusiveAddressUse = false;
-                udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
-                udpClient.Client.Bind(localEndPoint);
-                udpClient.JoinMulticastGroup(multicastIP);
-
-                while (true)
+                try
                 {
-                    byte[] data = udpClient.Receive(ref localEndPoint);
-                    _listaRecibida = (List<VisorData>)ByteArrayToObject(data);
-                    GenerarLista();
+                    IPAddress multicastIP = IPAddress.Parse(_ipMulticast);
+                    IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, Int32.Parse(_puerto));
+                    UdpClient udpClient = new UdpClient();
+                    udpClient.ExclusiveAddressUse = false;
+                    udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+                    udpClient.Client.Bind(localEndPoint);
+                    udpClient.JoinMulticastGroup(multicastIP);
+
+                    while (true)
+                    {
+                        byte[] data = udpClient.Receive(ref localEndPoint);
+                        _listaRecibida = (List<VisorData>)ByteArrayToObject(data);
+                        GenerarLista();
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Error iniciando cliente UDP." + Environment.NewLine + "No se puede iniciar la aplicación."
+                         + Environment.NewLine + e.ToString(), "Visor de Pedidos", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Application.Current.Shutdown();
+
                 }
             });
         }
@@ -131,6 +148,9 @@ namespace VisorPedidos
             }
         }
 
+        /// <summary>
+        /// Crea la lista de datos que se van a mostrar en funciion en las lineas configuradas.
+        /// </summary>
         private void GenerarLista()
         {
             if (_listaRecibida == null) return;
@@ -141,15 +161,11 @@ namespace VisorPedidos
             {
                 if (_lineasConfiguradas.Contains(item.Linea))
                 {
-                    Console.WriteLine(item.Modelo);
-                    Console.WriteLine(item.Linea);
-                    Console.WriteLine(item.PedidoAnterior);
                     _listaFiltrada.Add(item);
-                } 
+                }
             }
 
             if (_listaFiltrada == null) return;
-
 
             if (_listaFiltrada.Count > 1)
             {
@@ -163,6 +179,9 @@ namespace VisorPedidos
             ActualizarPantalla();
         }
 
+        /// <summary>
+        /// Cambia los datos que se ven en pantalla.
+        /// </summary>
         private void ActualizarPantalla()
         {
             var i = _listaFiltrada.Count;
@@ -178,11 +197,11 @@ namespace VisorPedidos
             _indiceDatosEnPantalla++;
         }
 
+
         private void TimerTick(Object source, ElapsedEventArgs e)
         {
             ActualizarPantalla();
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void NotifyPropertyChanged([CallerMemberName]string propertyName = "")
