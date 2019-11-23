@@ -27,6 +27,9 @@ namespace VisorPedidos
         private string _puerto;
         private Timer _timer;
         private int _indiceDatosEnPantalla = 0;
+        private bool _mostrarParcialTest;
+        private bool _mostrarParcialEmbalado;
+        private string _totalProducido;
 
         public MainViewModel()
         {
@@ -38,6 +41,20 @@ namespace VisorPedidos
             _timer.Elapsed += TimerTick;
             _timer.AutoReset = true;
 
+            this.PropertyChanged += ActualizadContadores;
+        }
+
+        private void ActualizadContadores(object sender, PropertyChangedEventArgs e)
+        {
+
+            switch (e.PropertyName)
+            {
+                case "DatosEnPantalla":
+                    MostrarParcialTest = DatosEnPantalla.UnidadesTesteadas == DatosEnPantalla.TotalUnidadesPedido;
+                    MostrarParcialEmbalado = DatosEnPantalla.UnidadesEmbaladas == DatosEnPantalla.TotalUnidadesPedido;
+                    TotalProducido = DatosEnPantalla.UnidadesEmbaladas + "/" + DatosEnPantalla.TotalUnidadesPedido;
+                    break;
+            }
         }
 
         public VisorData DatosEnPantalla
@@ -55,12 +72,42 @@ namespace VisorPedidos
             get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
         }
 
+        public bool MostrarParcialTest
+        {
+            get { return _mostrarParcialTest; }
+            set
+            {
+                _mostrarParcialTest = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public bool MostrarParcialEmbalado
+        {
+            get { return _mostrarParcialEmbalado; }
+            set
+            {
+                _mostrarParcialEmbalado = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public string TotalProducido
+        {
+            get { return _totalProducido; }
+            set
+            {
+                _totalProducido = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private void CargarConfiguracion()
         {
             try
             {
-                string configPath = Path.Combine(Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString(), "VisorPedidos.xml");
-                //string configPath = @"C:\Users\Rnmkr\Dropbox\repos\VisorPedidos\VisorPedidos\bin\Debug\VisorPedidos.xml"; //solo en design
+                //string configPath = Path.Combine(Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString(), "VisorPedidos.xml");
+                string configPath = @"C:\Users\Rnmkr\Dropbox\repos\VisorPedidos\VisorPedidos\bin\Debug\VisorPedidos.xml"; //solo en design
 
                 XDocument xml = XDocument.Load(configPath);
                 IEnumerable<XElement> config = xml.Root.Elements();
