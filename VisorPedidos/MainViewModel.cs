@@ -178,6 +178,7 @@ namespace VisorPedidos
                 if (_lineasConfiguradas.Contains(item.Linea))
                 {
                     _listaFiltrada.Add(item);
+                    //REMOVE ITEM CUANDO?
                 }
             }
 
