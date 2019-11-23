@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
@@ -27,9 +26,7 @@ namespace VisorPedidos
         private string _puerto;
         private Timer _timer;
         private int _indiceDatosEnPantalla = 0;
-        private bool _mostrarParcialTest;
-        private bool _mostrarParcialEmbalado;
-        private string _totalProducido;
+        private bool _mostrarParciales;
 
         public MainViewModel()
         {
@@ -37,24 +34,9 @@ namespace VisorPedidos
             
             IniciarClienteUDP();
 
-            _timer = new Timer(Int16.Parse(_segundosRotacion));
+            _timer = new Timer(double.Parse(_segundosRotacion + "000"));
             _timer.Elapsed += TimerTick;
             _timer.AutoReset = true;
-
-            this.PropertyChanged += ActualizadContadores;
-        }
-
-        private void ActualizadContadores(object sender, PropertyChangedEventArgs e)
-        {
-
-            switch (e.PropertyName)
-            {
-                case "DatosEnPantalla":
-                    MostrarParcialTest = DatosEnPantalla.UnidadesTesteadas == DatosEnPantalla.TotalUnidadesPedido;
-                    MostrarParcialEmbalado = DatosEnPantalla.UnidadesEmbaladas == DatosEnPantalla.TotalUnidadesPedido;
-                    TotalProducido = DatosEnPantalla.UnidadesEmbaladas + "/" + DatosEnPantalla.TotalUnidadesPedido;
-                    break;
-            }
         }
 
         public VisorData DatosEnPantalla
@@ -64,7 +46,14 @@ namespace VisorPedidos
             {
                 _datosEnPantalla = value;
                 NotifyPropertyChanged();
+                AsignarVisibilidadParciales();
             }
+        }
+
+        private void AsignarVisibilidadParciales()
+        {
+            MostrarParciales = (DatosEnPantalla.ParcialTest == DatosEnPantalla.TotalUnidadesPedido) ^
+                (DatosEnPantalla.ParcialEmbalado == DatosEnPantalla.TotalUnidadesPedido);
         }
 
         public string VersionAplicacion
@@ -72,32 +61,12 @@ namespace VisorPedidos
             get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
         }
 
-        public bool MostrarParcialTest
+        public bool MostrarParciales
         {
-            get { return _mostrarParcialTest; }
+            get { return _mostrarParciales; }
             set
             {
-                _mostrarParcialTest = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        public bool MostrarParcialEmbalado
-        {
-            get { return _mostrarParcialEmbalado; }
-            set
-            {
-                _mostrarParcialEmbalado = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        public string TotalProducido
-        {
-            get { return _totalProducido; }
-            set
-            {
-                _totalProducido = value;
+                _mostrarParciales= value;
                 NotifyPropertyChanged();
             }
         }
