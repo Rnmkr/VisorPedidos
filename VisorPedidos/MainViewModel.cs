@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
@@ -17,7 +18,7 @@ namespace VisorPedidos
 {
     public class MainViewModel : INotifyPropertyChanged 
     {
-        private List<VisorData> _listaRecibida;
+        private VisorData _datosRecibidos;
         private List<VisorData> _listaFiltrada;
         private VisorData _datosEnPantalla;
         private List<string> _lineasConfiguradas;
@@ -37,6 +38,8 @@ namespace VisorPedidos
             _timer = new Timer(double.Parse(_segundosRotacion + "000"));
             _timer.Elapsed += TimerTick;
             _timer.AutoReset = true;
+
+            _listaFiltrada = new List<VisorData>();
         }
 
         public VisorData DatosEnPantalla
@@ -135,13 +138,13 @@ namespace VisorPedidos
                     while (true)
                     {
                         byte[] data = udpClient.Receive(ref localEndPoint);
-                        _listaRecibida = (List<VisorData>)ByteArrayToObject(data);
+                        _datosRecibidos = (VisorData)ByteArrayToObject(data);
                         GenerarLista();
                     }
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Error iniciando cliente UDP." + Environment.NewLine + "No se puede iniciar la aplicación."
+                    MessageBox.Show("Error en cliente UDP." + Environment.NewLine + "La aplicación se cerrará."
                          + Environment.NewLine + e.ToString(), "Visor de Pedidos", MessageBoxButton.OK, MessageBoxImage.Error);
                     Application.Current.Shutdown();
 
@@ -159,7 +162,7 @@ namespace VisorPedidos
             using (var memStream = new MemoryStream(arrBytes))
             {
                 var binForm = new BinaryFormatter();
-                List<VisorData> obj = (List<VisorData>)binForm.Deserialize(memStream);
+                VisorData obj = (VisorData)binForm.Deserialize(memStream);
                 return obj;
             }
         }
@@ -169,19 +172,14 @@ namespace VisorPedidos
         /// </summary>
         private void GenerarLista()
         {
-            if (_listaRecibida == null) return;
+            if (_datosRecibidos == null) return;
 
-            _listaFiltrada = new List<VisorData>();
+            _listaFiltrada.RemoveAll(r => r.PedidoEnProduccion == _datosRecibidos.PedidoAnterior);
 
-            foreach (var item in _listaRecibida)
-            {
-                if (_lineasConfiguradas.Contains(item.Linea))
-                {
-                    _listaFiltrada.Add(item);
-                    //REMOVE ITEM CUANDO?
-                }
-            }
+            _listaFiltrada.RemoveAll(r => r.PedidoEnProduccion == _datosRecibidos.PedidoEnProduccion);
 
+            _listaFiltrada.Add(_datosRecibidos);
+                     
             if (_listaFiltrada == null) return;
 
             if (_listaFiltrada.Count > 1)
@@ -191,8 +189,10 @@ namespace VisorPedidos
             else
             {
                 _timer.Stop();
+                ActualizarPantalla();
             }
         }
+
 
         /// <summary>
         /// Cambia los datos que se ven en pantalla.
