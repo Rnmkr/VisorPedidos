@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920" MinHeight="1200" MinWidth="1920"
         ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen"
-        WindowStyle="None" WindowState="Maximized" >
+        WindowStyle="None" WindowState="Maximized" Cursor="None" >
     <Window.DataContext>
         <local:MainViewModel/>
     </Window.DataContext>
