@@ -29,6 +29,8 @@ namespace VisorPedidos
         private Timer _timer;
         private int _indiceDatosEnPantalla = 0;
         private bool _mostrarParciales;
+        private bool _strikeEmbalado;
+        private bool _strikeTesteado;
 
         public MainViewModel()
         {
@@ -43,6 +45,26 @@ namespace VisorPedidos
             _listaFiltrada = new List<VisorData>();
         }
 
+        public bool StrikeEmbalado
+        {
+            get { return _strikeEmbalado; }
+            set
+            {
+                _strikeEmbalado = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public bool StrikeTesteado
+        {
+            get { return _strikeTesteado; }
+            set
+            {
+                _strikeTesteado = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public VisorData DatosEnPantalla
         {
             get { return _datosEnPantalla; }
@@ -51,13 +73,20 @@ namespace VisorPedidos
                 _datosEnPantalla = value;
                 NotifyPropertyChanged();
                 AsignarVisibilidadParciales();
+                AsignarStroke();
             }
+        }
+
+        private void AsignarStroke()
+        {
+            if (DatosEnPantalla.UnidadesEmbaladas == DatosEnPantalla.ParcialEmbalado) { StrikeEmbalado = true; } else { StrikeEmbalado = false; }
+            if (DatosEnPantalla.UnidadesTesteadas == DatosEnPantalla.ParcialTest) { StrikeTesteado = true; } else { StrikeTesteado = false; }
         }
 
         private void AsignarVisibilidadParciales()
         {
-            MostrarParciales = (DatosEnPantalla.ParcialTest == DatosEnPantalla.TotalUnidadesPedido) ^
-                (DatosEnPantalla.ParcialEmbalado == DatosEnPantalla.TotalUnidadesPedido);
+            if (DatosEnPantalla.ParcialTest != DatosEnPantalla.TotalUnidadesPedido) { MostrarParciales = true; }
+            if (DatosEnPantalla.ParcialEmbalado != DatosEnPantalla.TotalUnidadesPedido) { MostrarParciales = true; }
         }
 
         public string VersionAplicacion
@@ -205,7 +234,6 @@ namespace VisorPedidos
                 ActualizarPantalla();
             }
         }
-
 
         /// <summary>
         /// Cambia los datos que se ven en pantalla.

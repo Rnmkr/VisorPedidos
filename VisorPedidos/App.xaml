@@ -4,6 +4,25 @@
              xmlns:local="clr-namespace:VisorPedidos"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <Style x:Key="StrikethroughTextBlock" TargetType="{x:Type TextBlock}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" Value="True">
+                    <Setter Property="TextDecorations" Value="Strikethrough" />
+                    <Setter Property="TextDecorations">
+                        <Setter.Value>
+                            <TextDecorationCollection>
+                                <TextDecoration Location="Strikethrough">
+                                    <TextDecoration.Pen>
+                                        <Pen Brush="Red" Thickness="2"/>
+                                    </TextDecoration.Pen>
+                                </TextDecoration>
+                            </TextDecorationCollection>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
     </Application.Resources>
 </Application>
