@@ -153,8 +153,8 @@ namespace VisorPedidos
             try
             {
                 //string configPath = Path.Combine(Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString(), "VisorPedidos.xml");
-                //string configPath = @"C:\Users\Rnmkr\Dropbox\repos\VisorPedidos\VisorPedidos\bin\Debug\VisorPedidos.xml"; //solo en design
-                string configPath = @"D:\Dropbox\repos\VisorPedidos\VisorPedidos\bin\Debug\VisorPedidos.xml"; //solo en design
+                string configPath = @"C:\Users\Rnmkr\Dropbox\repos\VisorPedidos\VisorPedidos\bin\Debug\VisorPedidos.xml"; //solo en design
+                //string configPath = @"D:\Dropbox\repos\VisorPedidos\VisorPedidos\bin\Debug\VisorPedidos.xml"; //solo en design
 
 
                 XDocument xml = XDocument.Load(configPath);
@@ -316,6 +316,7 @@ namespace VisorPedidos
 
         private void SetStandBy()
         {
+            _timerRotacion.Stop();
             _timerStandBy.Stop();
             MostrarDatos = false;
             MostrarMensajeStandBy = true;

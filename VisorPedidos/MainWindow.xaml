@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VisorPedidos"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1080" Width="1920" MinHeight="1200" MinWidth="1920"
+        Title="MainWindow" Height="1080" Width="1920" MinHeight="1080" MinWidth="1920"
         ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen"
         WindowStyle="None" WindowState="Maximized" Cursor="None" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" >
     <Window.DataContext>
@@ -103,9 +103,12 @@
 
 
         </Grid>
-        <StackPanel Visibility="{Binding MostrarMensajeStandBy, Converter={StaticResource BooleanToVisibilityConverter}}" Orientation="Vertical" VerticalAlignment="Center">
-            <Label Margin="0" Content="TERMINAL DESCONECTADA" Foreground="Red" FontSize="150" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-            <Label Margin="0" Content="NO SE ESTAN PROCESANDO UNIDADES" Foreground="Red" FontSize="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <StackPanel Visibility="{Binding MostrarMensajeStandBy, Converter={StaticResource BooleanToVisibilityConverter}}" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Image Source="pack://application:,,,/VisorPedidos;component/Resources/Desconectado256x256.png" Width="256" Height="256"/>
+            <Label Margin="0" Content="DESCONECTADO" Foreground="Red" FontSize="200" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" />
+            <Label Margin="0" Content="NO SE RECIBIERON DATOS POR VARIOS MINUTOS" Foreground="Red" FontSize="68" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <Label Margin="0" Content="EL TERMINAL DE EMBALADO DEBE CONECTARSE A LA RED" Foreground="Red" FontSize="68" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <Label Margin="0" Content="AUNQUE NO ESTE PROCESANDO UNIDADES" Foreground="Red" FontSize="68" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         </StackPanel>
     </Grid>
     
