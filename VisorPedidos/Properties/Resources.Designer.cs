@@ -63,9 +63,9 @@ namespace VisorPedidos.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Finalizado {
+        internal static System.Drawing.Bitmap Finalizado1312x1080 {
             get {
-                object obj = ResourceManager.GetObject("Finalizado", resourceCulture);
+                object obj = ResourceManager.GetObject("Finalizado1312x1080", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

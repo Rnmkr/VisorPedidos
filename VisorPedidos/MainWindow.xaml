@@ -41,7 +41,6 @@
             <RowDefinition Height="60"/>
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
-        <!--{Binding MostrarFinalizado, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}"-->
 
         <TextBlock HorizontalAlignment="Right" Margin="0,0,10,0" Grid.Row="15" TextWrapping="Wrap" Text="{Binding VersionAplicacion, FallbackValue=--.--.--.--, Mode=OneTime}" VerticalAlignment="Bottom" Grid.Column="1"  Foreground="#FF404040" />
 
@@ -70,7 +69,7 @@
         </DockPanel>
         <Label Content="{Binding DatosEnPantalla.EmbaladoresDesignados, FallbackValue=-------------------------------------------------------, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource OpacityLabel}" Tag="{Binding EmbaladoCompletado}" Foreground="Lime" Grid.Row="15" FontWeight="Bold" FontSize="24" Grid.Column="0" Grid.RowSpan="1" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" FontFamily="Arial Black" VerticalAlignment="Top"/>
 
-        <Grid Grid.Column="1" Grid.RowSpan="16" Background="#FF141414" />
+        <Grid Grid.Column="1" Grid.RowSpan="16" Background="#FF323232" />
 
         <Label Content="PRODUCTO" Foreground="#FF404040" Margin="0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" FontWeight="Bold" VerticalContentAlignment="Center" FontFamily="Arial Black" FontSize="18" HorizontalAlignment="Center"/>
         <Label Content="{Binding DatosEnPantalla.Producto, FallbackValue=--------------------, UpdateSourceTrigger=PropertyChanged}" Foreground="White" Grid.Row="0" Grid.RowSpan="1" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" FontFamily="Arial Black" Margin="0"/>
@@ -102,7 +101,7 @@
         <Label Content="ULTIMAS TESTEADAS" Foreground="Yellow" Margin="0" Grid.Row="10" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" VerticalAlignment="Bottom" FontSize="18" FontFamily="Arial Black"/>
         <TextBlock TextWrapping="Wrap" Text="{Binding DatosEnPantalla.UltimasTesteadas, FallbackValue=-----------, UpdateSourceTrigger=PropertyChanged}" Foreground="White" Grid.Row="11" Grid.RowSpan="2" FontWeight="Bold" FontSize="36" Grid.Column="1" Margin="0" FontFamily="Arial Black" HorizontalAlignment="Center"/>
 
-        <Image Source="pack://application:,,,/VisorPedidos;component/Resources/Finalizado.png" Visibility="{Binding MostrarFinalizado, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="2" Grid.RowSpan="13" Grid.Column="0" Opacity=".7"/>
+        <Image Source="pack://application:,,,/VisorPedidos;component/Resources/Finalizado1312x1080.png" Visibility="{Binding MostrarFinalizado, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="0" Grid.RowSpan="16" Grid.Column="0" Opacity=".7"/>
 
     </Grid>
 </Window>

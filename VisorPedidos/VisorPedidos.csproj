@@ -101,7 +101,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Finalizado.png" />
+    <Resource Include="Resources\Finalizado1312x1080.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
