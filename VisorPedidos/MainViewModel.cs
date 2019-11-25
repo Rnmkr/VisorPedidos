@@ -29,8 +29,9 @@ namespace VisorPedidos
         private Timer _timer;
         private int _indiceDatosEnPantalla = 0;
         private bool _mostrarParciales;
-        private bool _strikeEmbalado;
-        private bool _strikeTesteado;
+        private bool _testeoCompletado;
+        private bool _embaladoCompletado;
+        private bool _mostrarFinalizado;
 
         public MainViewModel()
         {
@@ -45,22 +46,22 @@ namespace VisorPedidos
             _listaFiltrada = new List<VisorData>();
         }
 
-        public bool StrikeEmbalado
+        public bool EmbaladoCompletado
         {
-            get { return _strikeEmbalado; }
+            get { return _embaladoCompletado; }
             set
             {
-                _strikeEmbalado = value;
+                _embaladoCompletado = value;
                 NotifyPropertyChanged();
             }
         }
 
-        public bool StrikeTesteado
+        public bool TesteoCompletado
         {
-            get { return _strikeTesteado; }
+            get { return _testeoCompletado; }
             set
             {
-                _strikeTesteado = value;
+                _testeoCompletado = value;
                 NotifyPropertyChanged();
             }
         }
@@ -73,14 +74,15 @@ namespace VisorPedidos
                 _datosEnPantalla = value;
                 NotifyPropertyChanged();
                 AsignarVisibilidadParciales();
-                AsignarStroke();
+                AsignarAdornos();
             }
         }
 
-        private void AsignarStroke()
+        private void AsignarAdornos()
         {
-            if (DatosEnPantalla.UnidadesEmbaladas == DatosEnPantalla.ParcialEmbalado) { StrikeEmbalado = true; } else { StrikeEmbalado = false; }
-            if (DatosEnPantalla.UnidadesTesteadas == DatosEnPantalla.ParcialTest) { StrikeTesteado = true; } else { StrikeTesteado = false; }
+            if (DatosEnPantalla.UnidadesEmbaladas == DatosEnPantalla.ParcialEmbalado) { EmbaladoCompletado = true; } else { EmbaladoCompletado = false; }
+            if (DatosEnPantalla.UnidadesTesteadas == DatosEnPantalla.ParcialTest) { TesteoCompletado = true; } else { TesteoCompletado = false; }
+            if (TesteoCompletado == true && EmbaladoCompletado == true) { MostrarFinalizado = true; } else { MostrarFinalizado = false; }
         }
 
         private void AsignarVisibilidadParciales()
@@ -104,12 +106,24 @@ namespace VisorPedidos
             }
         }
 
+        public bool MostrarFinalizado
+        {
+            get { return _mostrarFinalizado; }
+            set
+            {
+                _mostrarFinalizado = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private void CargarConfiguracion()
         {
             try
             {
                 //string configPath = Path.Combine(Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString(), "VisorPedidos.xml");
-                string configPath = @"C:\Users\Rnmkr\Dropbox\repos\VisorPedidos\VisorPedidos\bin\Debug\VisorPedidos.xml"; //solo en design
+                //string configPath = @"C:\Users\Rnmkr\Dropbox\repos\VisorPedidos\VisorPedidos\bin\Debug\VisorPedidos.xml"; //solo en design
+                string configPath = @"D:\Dropbox\repos\VisorPedidos\VisorPedidos\bin\Debug\VisorPedidos.xml"; //solo en design
+
 
                 XDocument xml = XDocument.Load(configPath);
                 IEnumerable<XElement> config = xml.Root.Elements();

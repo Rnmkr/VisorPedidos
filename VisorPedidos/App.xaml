@@ -5,21 +5,10 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
 
-        <Style x:Key="StrikethroughTextBlock" TargetType="{x:Type TextBlock}">
+        <Style x:Key="OpacityLabel" TargetType="{x:Type Label}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                    <Setter Property="TextDecorations" Value="Strikethrough" />
-                    <Setter Property="TextDecorations">
-                        <Setter.Value>
-                            <TextDecorationCollection>
-                                <TextDecoration Location="Strikethrough">
-                                    <TextDecoration.Pen>
-                                        <Pen Brush="Red" Thickness="2"/>
-                                    </TextDecoration.Pen>
-                                </TextDecoration>
-                            </TextDecorationCollection>
-                        </Setter.Value>
-                    </Setter>
+                    <Setter Property="Opacity" Value="0.5"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
