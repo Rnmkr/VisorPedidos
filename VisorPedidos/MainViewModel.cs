@@ -24,14 +24,18 @@ namespace VisorPedidos
         private VisorData _datosEnPantalla;
         private List<string> _lineasConfiguradas;
         private string _segundosRotacion;
+        private string _segundosStandBy;
         private string _ipMulticast;
         private string _puerto;
-        private Timer _timer;
+        private Timer _timerRotacion;
+        private Timer _timerStandBy;
         private int _indiceDatosEnPantalla = 0;
         private bool _mostrarParciales;
         private bool _testeoCompletado;
         private bool _embaladoCompletado;
         private bool _mostrarFinalizado;
+        private bool _mostrarDatos = false;
+        private bool _mostrarMensajeStandBy = true;
 
         public MainViewModel()
         {
@@ -39,9 +43,13 @@ namespace VisorPedidos
             
             IniciarClienteUDP();
 
-            _timer = new Timer(double.Parse(_segundosRotacion + "000"));
-            _timer.Elapsed += TimerTick;
-            _timer.AutoReset = true;
+            _timerRotacion = new Timer(double.Parse(_segundosRotacion + "000"));
+            _timerRotacion.Elapsed += TimerRotacionTick;
+            _timerRotacion.AutoReset = true;
+
+            _timerStandBy = new Timer(double.Parse(_segundosStandBy + "000")); //5 minutos
+            _timerStandBy.Elapsed += TimerStandByTick;
+            _timerStandBy.AutoReset = true;
 
             _listaFiltrada = new List<VisorData>();
         }
@@ -52,6 +60,26 @@ namespace VisorPedidos
             set
             {
                 _embaladoCompletado = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public bool MostrarDatos
+        {
+            get { return _mostrarDatos; }
+            set
+            {
+                _mostrarDatos = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public bool MostrarMensajeStandBy
+        {
+            get { return _mostrarMensajeStandBy; }
+            set
+            {
+                _mostrarMensajeStandBy = value;
                 NotifyPropertyChanged();
             }
         }
@@ -73,23 +101,8 @@ namespace VisorPedidos
             {
                 _datosEnPantalla = value;
                 NotifyPropertyChanged();
-                AsignarVisibilidadParciales();
-                AsignarAdornos();
+                AsignarVisibilidad();
             }
-        }
-
-        private void AsignarAdornos()
-        {
-            if (DatosEnPantalla.UnidadesEmbaladas == DatosEnPantalla.ParcialEmbalado) { EmbaladoCompletado = true; } else { EmbaladoCompletado = false; }
-            if (DatosEnPantalla.UnidadesTesteadas == DatosEnPantalla.ParcialTest) { TesteoCompletado = true; } else { TesteoCompletado = false; }
-            if (TesteoCompletado == true && EmbaladoCompletado == true) { MostrarFinalizado = true; } else { MostrarFinalizado = false; }
-        }
-
-        private void AsignarVisibilidadParciales()
-        {
-            MostrarParciales = false;
-            if (DatosEnPantalla.ParcialTest != DatosEnPantalla.TotalUnidadesPedido) { MostrarParciales = true; }
-            if (DatosEnPantalla.ParcialEmbalado != DatosEnPantalla.TotalUnidadesPedido) { MostrarParciales = true; }
         }
 
         public string VersionAplicacion
@@ -115,6 +128,24 @@ namespace VisorPedidos
                 _mostrarFinalizado = value;
                 NotifyPropertyChanged();
             }
+        }
+
+
+        private void AsignarVisibilidad()
+        {
+            if (DatosEnPantalla.UnidadesEmbaladas == DatosEnPantalla.ParcialEmbalado) { EmbaladoCompletado = true; } else { EmbaladoCompletado = false; }
+            if (DatosEnPantalla.UnidadesTesteadas == DatosEnPantalla.ParcialTest) { TesteoCompletado = true; } else { TesteoCompletado = false; }
+
+            if (TesteoCompletado == true && EmbaladoCompletado == true) { MostrarFinalizado = true; } else { MostrarFinalizado = false; }
+
+            MostrarParciales = false;
+            if (DatosEnPantalla.ParcialTest != DatosEnPantalla.TotalUnidadesPedido) { MostrarParciales = true; }
+            if (DatosEnPantalla.ParcialEmbalado != DatosEnPantalla.TotalUnidadesPedido) { MostrarParciales = true; }
+
+            MostrarDatos = true;
+            MostrarMensajeStandBy = false;
+            _timerStandBy.Stop();
+            _timerStandBy.Start();
         }
 
         private void CargarConfiguracion()
@@ -147,6 +178,10 @@ namespace VisorPedidos
 
                         case "segundosrotacion":
                             _segundosRotacion = c.Value;
+                            break;
+
+                        case "segundosstandby":
+                            _segundosStandBy = c.Value;
                             break;
 
                         default:
@@ -241,11 +276,11 @@ namespace VisorPedidos
 
             if (_listaFiltrada.Count > 1)
             {
-                _timer.Start();
+                _timerRotacion.Start();
             }
             else
             {
-                _timer.Stop();
+                _timerRotacion.Stop();
                 ActualizarPantalla();
             }
         }
@@ -269,9 +304,21 @@ namespace VisorPedidos
         }
 
 
-        private void TimerTick(Object source, ElapsedEventArgs e)
+        private void TimerRotacionTick(Object source, ElapsedEventArgs e)
         {
             ActualizarPantalla();
+        }
+
+        private void TimerStandByTick(Object source, ElapsedEventArgs e)
+        {
+            SetStandBy();
+        }
+
+        private void SetStandBy()
+        {
+            _timerStandBy.Stop();
+            MostrarDatos = false;
+            MostrarMensajeStandBy = true;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
