@@ -47,7 +47,10 @@
 
         <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,60,0" >
             <Label Content="TOTAL" Foreground="#FF404040" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" FontFamily="Arial Black" FontSize="18" Background="{x:Null}" Padding="0"/>
-            <Label Content="{Binding DatosEnPantalla.TotalUnidadesPedido, FallbackValue=----, UpdateSourceTrigger=PropertyChanged}" Foreground="White" Margin="0" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontFamily="Arial Black" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="x" Foreground="White" Margin="0" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontFamily="Arial Black" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0"/>
+                <Label Content="{Binding DatosEnPantalla.TotalUnidadesPedido, FallbackValue=----, UpdateSourceTrigger=PropertyChanged}" Foreground="White" Margin="0" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontFamily="Arial Black" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0"/>
+            </StackPanel>
         </StackPanel>
 
         <Label Content="TESTEADO" Foreground="#FF404040" Grid.Row="2" VerticalAlignment="Bottom" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0" FontFamily="Arial Black" FontSize="18" Background="{x:Null}"/>
