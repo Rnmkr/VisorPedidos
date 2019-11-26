@@ -97,7 +97,7 @@
             <Label Content="ULTIMAS EMBALADAS" Style="{StaticResource OpacityEffect}" Tag="{Binding EmbaladoCompletado}" Foreground="Lime" Margin="0" Grid.Row="13" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" VerticalAlignment="Bottom" FontSize="18" FontFamily="Arial Black"/>
             <TextBlock TextWrapping="Wrap" Style="{StaticResource OpacityEffect}" Tag="{Binding EmbaladoCompletado}" Text="{Binding DatosEnPantalla.UltimasEmbaladas, FallbackValue=-----------, UpdateSourceTrigger=PropertyChanged}" Foreground="White" Grid.Row="14" Grid.RowSpan="2" FontWeight="Bold" FontSize="36" Grid.Column="1" Margin="0" FontFamily="Arial Black" HorizontalAlignment="Center"/>
 
-            <Image Source="pack://application:,,,/VisorPedidos;component/Resources/Finalizado1312x1080.png" Visibility="{Binding MostrarFinalizado, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="0" Grid.RowSpan="16" Grid.Column="0" Opacity=".7"/>
+            <Image Source="pack://application:,,,/VisorPedidos;component/Resources/Finalizado1312x1080.png" Visibility="{Binding MostrarFinalizado, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="0" Grid.RowSpan="16" Grid.Column="0" Opacity="1"/>
 
         </Grid>
 
