@@ -47,7 +47,7 @@ namespace VisorPedidos
             _timerRotacion.Elapsed += TimerRotacionTick;
             _timerRotacion.AutoReset = true;
 
-            _timerStandBy = new Timer(double.Parse(_minutosStandBy + "0000")); // minutos
+            _timerStandBy = new Timer(double.Parse(_minutosStandBy + "00000")); // minutos
             _timerStandBy.Elapsed += TimerStandByTick;
             _timerStandBy.AutoReset = true;
 
