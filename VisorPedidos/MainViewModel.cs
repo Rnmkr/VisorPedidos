@@ -24,12 +24,12 @@ namespace VisorPedidos
         private VisorData _datosEnPantalla;
         private List<string> _lineasConfiguradas;
         private string _segundosRotacion;
-        private string _segundosStandBy;
+        private string _minutosStandBy;
         private string _ipMulticast;
         private string _puerto;
         private Timer _timerRotacion;
         private Timer _timerStandBy;
-        private int _indiceDatosEnPantalla = 0;
+        private int _indiceDatosEnPantalla = 0; // -1?
         private bool _mostrarParciales;
         private bool _testeoCompletado;
         private bool _embaladoCompletado;
@@ -43,11 +43,11 @@ namespace VisorPedidos
             
             IniciarClienteUDP();
 
-            _timerRotacion = new Timer(double.Parse(_segundosRotacion + "000"));
+            _timerRotacion = new Timer(double.Parse(_segundosRotacion + "000")); //segundos
             _timerRotacion.Elapsed += TimerRotacionTick;
             _timerRotacion.AutoReset = true;
 
-            _timerStandBy = new Timer(double.Parse(_segundosStandBy + "000")); //5 minutos
+            _timerStandBy = new Timer(double.Parse(_minutosStandBy + "0000")); // minutos
             _timerStandBy.Elapsed += TimerStandByTick;
             _timerStandBy.AutoReset = true;
 
@@ -133,6 +133,7 @@ namespace VisorPedidos
 
         private void AsignarVisibilidad()
         {
+
             if (DatosEnPantalla.UnidadesEmbaladas == DatosEnPantalla.ParcialEmbalado) { EmbaladoCompletado = true; } else { EmbaladoCompletado = false; }
             if (DatosEnPantalla.UnidadesTesteadas == DatosEnPantalla.ParcialTest) { TesteoCompletado = true; } else { TesteoCompletado = false; }
 
@@ -141,20 +142,18 @@ namespace VisorPedidos
             MostrarParciales = false;
             if (DatosEnPantalla.ParcialTest != DatosEnPantalla.TotalUnidadesPedido) { MostrarParciales = true; }
             if (DatosEnPantalla.ParcialEmbalado != DatosEnPantalla.TotalUnidadesPedido) { MostrarParciales = true; }
-
-            MostrarDatos = true;
-            MostrarMensajeStandBy = false;
-            _timerStandBy.Stop();
-            _timerStandBy.Start();
         }
 
         private void CargarConfiguracion()
         {
             try
             {
-                //string configPath = Path.Combine(Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString(), "VisorPedidos.xml");
-                string configPath = @"C:\Users\Rnmkr\Dropbox\repos\VisorPedidos\VisorPedidos\bin\Debug\VisorPedidos.xml"; //solo en design
-                //string configPath = @"D:\Dropbox\repos\VisorPedidos\VisorPedidos\bin\Debug\VisorPedidos.xml"; //solo en design
+                string configPath = Path.Combine(Directory.GetParent(Assembly.GetExecutingAssembly().Location).ToString(), "VisorPedidos.xml");
+
+                if (!File.Exists(configPath))
+                {
+                    File.WriteAllText(configPath, VisorPedidos.Properties.Resources.VisorPedidos);
+                }
 
 
                 XDocument xml = XDocument.Load(configPath);
@@ -180,8 +179,8 @@ namespace VisorPedidos
                             _segundosRotacion = c.Value;
                             break;
 
-                        case "segundosstandby":
-                            _segundosStandBy = c.Value;
+                        case "minutosstandby":
+                            _minutosStandBy = c.Value;
                             break;
 
                         default:
@@ -273,7 +272,6 @@ namespace VisorPedidos
                      
             if (_listaFiltrada == null) return;
 
-
             if (_listaFiltrada.Count > 1)
             {
                 _timerRotacion.Start();
@@ -283,6 +281,11 @@ namespace VisorPedidos
                 _timerRotacion.Stop();
                 ActualizarPantalla();
             }
+
+            MostrarDatos = true;
+            MostrarMensajeStandBy = false;
+            _timerStandBy.Stop();
+            _timerStandBy.Start();
         }
 
         /// <summary>
@@ -296,7 +299,7 @@ namespace VisorPedidos
 
             if (_indiceDatosEnPantalla >= i)
             {
-                _indiceDatosEnPantalla = 0;
+                _indiceDatosEnPantalla = 0; // -1?
             }
 
             DatosEnPantalla = _listaFiltrada[_indiceDatosEnPantalla];

@@ -5,7 +5,7 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
 
-        <Style x:Key="OpacityLabel" TargetType="{x:Type Label}">
+        <Style x:Key="OpacityEffect" TargetType="{x:Type FrameworkElement}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" Value="True">
                     <Setter Property="Opacity" Value="0.5"/>

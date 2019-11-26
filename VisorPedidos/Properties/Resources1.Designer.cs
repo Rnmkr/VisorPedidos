@@ -63,10 +63,42 @@ namespace VisorPedidos.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Desconectado256x256 {
+            get {
+                object obj = ResourceManager.GetObject("Desconectado256x256", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Finalizado1312x1080 {
             get {
                 object obj = ResourceManager.GetObject("Finalizado1312x1080", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        ///
+        /// &lt;configuracion&gt;
+        ///	&lt;linea&gt;01&lt;/linea&gt;
+        ///	&lt;linea&gt;02&lt;/linea&gt;
+        ///	&lt;linea&gt;03&lt;/linea&gt;
+        ///	&lt;linea&gt;04&lt;/linea&gt;
+        ///	&lt;linea&gt;05&lt;/linea&gt;
+        ///	&lt;ipmulticast&gt;239.239.239.239&lt;/ipmulticast&gt;
+        ///	&lt;puerto&gt;7001&lt;/puerto&gt;
+        ///	&lt;segundosrotacion&gt;7&lt;/segundosrotacion&gt;
+        ///	&lt;minutosstandby&gt;5&lt;/minutosstandby&gt;
+        /// &lt;/configuracion&gt;
+        ///.
+        /// </summary>
+        internal static string VisorPedidos {
+            get {
+                return ResourceManager.GetString("VisorPedidos", resourceCulture);
             }
         }
     }

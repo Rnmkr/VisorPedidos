@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+ <configuracion>
+	<linea>01</linea>
+	<linea>02</linea>
+	<linea>03</linea>
+	<linea>04</linea>
+	<linea>05</linea>
+	<ipmulticast>239.239.239.239</ipmulticast>
+	<puerto>7001</puerto>
+	<segundosrotacion>7</segundosrotacion>
+	<minutosstandby>5</minutosstandby>
+ </configuracion>
