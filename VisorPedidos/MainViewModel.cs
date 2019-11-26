@@ -23,8 +23,8 @@ namespace VisorPedidos
         private List<VisorData> _listaFiltrada;
         private VisorData _datosEnPantalla;
         private List<string> _lineasConfiguradas;
-        private string _segundosRotacion;
-        private string _minutosStandBy;
+        private double _segundosRotacion;
+        private double _minutosStandBy;
         private string _ipMulticast;
         private string _puerto;
         private Timer _timerRotacion;
@@ -43,11 +43,11 @@ namespace VisorPedidos
             
             IniciarClienteUDP();
 
-            _timerRotacion = new Timer(double.Parse(_segundosRotacion + "000")); //segundos
+            _timerRotacion = new Timer(_segundosRotacion);
             _timerRotacion.Elapsed += TimerRotacionTick;
             _timerRotacion.AutoReset = true;
 
-            _timerStandBy = new Timer(double.Parse(_minutosStandBy + "00000")); // minutos
+            _timerStandBy = new Timer(_minutosStandBy);
             _timerStandBy.Elapsed += TimerStandByTick;
             _timerStandBy.AutoReset = true;
 
@@ -176,11 +176,13 @@ namespace VisorPedidos
                             break;
 
                         case "segundosrotacion":
-                            _segundosRotacion = c.Value;
+                            var sr = double.Parse(c.Value);
+                            _segundosRotacion = sr * 1000;
                             break;
 
                         case "minutosstandby":
-                            _minutosStandBy = c.Value;
+                            var mr = double.Parse(c.Value);
+                            _minutosStandBy = mr * 60000;
                             break;
 
                         default:
