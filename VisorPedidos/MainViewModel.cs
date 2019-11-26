@@ -258,6 +258,7 @@ namespace VisorPedidos
         private void GenerarLista()
         {
             if (_datosRecibidos == null) return;
+            if (!_lineasConfiguradas.Contains(_datosRecibidos.Linea)) return;
 
             _listaFiltrada.RemoveAll(r => r.PedidoEnProduccion == _datosRecibidos.PedidoAnterior);
 

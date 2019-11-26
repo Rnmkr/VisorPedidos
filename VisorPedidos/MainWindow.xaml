@@ -99,16 +99,16 @@
 
             <Image Source="pack://application:,,,/VisorPedidos;component/Resources/Finalizado1312x1080.png" Visibility="{Binding MostrarFinalizado, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="0" Grid.RowSpan="16" Grid.Column="0" Opacity=".7"/>
 
-            <TextBlock HorizontalAlignment="Right" Margin="0,0,10,0" Grid.Row="15" TextWrapping="Wrap" Text="{Binding VersionAplicacion, FallbackValue=--.--.--.--, Mode=OneTime}" VerticalAlignment="Bottom" Grid.Column="1"  Foreground="#FF404040" />
-
-
         </Grid>
+
         <StackPanel Visibility="{Binding MostrarMensajeStandBy, Converter={StaticResource BooleanToVisibilityConverter}}" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Image Source="pack://application:,,,/VisorPedidos;component/Resources/Desconectado256x256.png" Width="256" Height="256" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <Label Margin="0" Content="DESCONECTADO" Foreground="Red" FontSize="200" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" />
             <Label Margin="0" Content="EL TERMINAL DE EMBALADO DEBE CONECTARSE A LA RED" Foreground="Red" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
             <Label Margin="0" Content="AUNQUE NO ESTE PROCESANDO UNIDADES" Foreground="Red" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         </StackPanel>
+        
+            <TextBlock HorizontalAlignment="Right" Margin="0,0,10,0" Grid.Row="15" TextWrapping="Wrap" Text="{Binding VersionAplicacion, FallbackValue=--.--.--.--, Mode=OneTime}" VerticalAlignment="Bottom" Grid.Column="1"  Foreground="#FF404040" />
     </Grid>
     
 </Window>
