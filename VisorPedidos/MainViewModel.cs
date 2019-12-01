@@ -133,9 +133,43 @@ namespace VisorPedidos
 
         private void AsignarVisibilidad()
         {
+            int embaladas;
+            int parcialembalado;
+            int testeadas;
+            int parcialtesteado;
 
-            if (DatosEnPantalla.UnidadesEmbaladas == DatosEnPantalla.ParcialEmbalado) { EmbaladoCompletado = true; } else { EmbaladoCompletado = false; }
-            if (DatosEnPantalla.UnidadesTesteadas == DatosEnPantalla.ParcialTest) { TesteoCompletado = true; } else { TesteoCompletado = false; }
+            try
+            {
+                embaladas = Convert.ToInt32(DatosEnPantalla.UnidadesEmbaladas);
+                parcialembalado = Convert.ToInt32(DatosEnPantalla.ParcialEmbalado);
+                testeadas = Convert.ToInt32(DatosEnPantalla.UnidadesTesteadas);
+                parcialtesteado = Convert.ToInt32(DatosEnPantalla.ParcialTest);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
+
+            if (embaladas >= parcialembalado)
+            {
+                DatosEnPantalla.UnidadesEmbaladas = DatosEnPantalla.ParcialEmbalado;
+                EmbaladoCompletado = true;
+            }
+            else
+            {
+                EmbaladoCompletado = false; 
+            }
+
+            if (testeadas >= parcialtesteado)
+            {
+                DatosEnPantalla.UnidadesTesteadas = DatosEnPantalla.ParcialTest;
+                TesteoCompletado = true;
+            }
+            else
+            {
+                TesteoCompletado = false;
+            }
 
             if (TesteoCompletado == true && EmbaladoCompletado == true) { MostrarFinalizado = true; } else { MostrarFinalizado = false; }
 
