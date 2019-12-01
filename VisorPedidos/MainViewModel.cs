@@ -33,7 +33,7 @@ namespace VisorPedidos
         private bool _mostrarParciales;
         private bool _testeoCompletado;
         private bool _embaladoCompletado;
-        private bool _mostrarFinalizado;
+        private bool _pedidoCompletado;
         private bool _mostrarDatos = false;
         private bool _mostrarMensajeStandBy = true;
 
@@ -52,6 +52,16 @@ namespace VisorPedidos
             _timerStandBy.AutoReset = true;
 
             _listaFiltrada = new List<VisorData>();
+        }
+
+        public bool PedidoCompletado
+        {
+            get { return _pedidoCompletado; }
+            set
+            {
+                _pedidoCompletado = value;
+                NotifyPropertyChanged();
+            }
         }
 
         public bool EmbaladoCompletado
@@ -120,17 +130,6 @@ namespace VisorPedidos
             }
         }
 
-        public bool MostrarFinalizado
-        {
-            get { return _mostrarFinalizado; }
-            set
-            {
-                _mostrarFinalizado = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-
         private void AsignarVisibilidad()
         {
             int embaladas;
@@ -171,7 +170,7 @@ namespace VisorPedidos
                 TesteoCompletado = false;
             }
 
-            if (TesteoCompletado == true && EmbaladoCompletado == true) { MostrarFinalizado = true; } else { MostrarFinalizado = false; }
+            if (TesteoCompletado == true && EmbaladoCompletado == true) { PedidoCompletado = true; } else { PedidoCompletado = false; }
 
             MostrarParciales = false;
             if (DatosEnPantalla.ParcialTest != DatosEnPantalla.TotalUnidadesPedido) { MostrarParciales = true; }
