@@ -297,7 +297,7 @@ namespace VisorPedidos
 
             var updateableData = _listaFiltrada.FirstOrDefault(r => r.PedidoEnProduccion == _datosRecibidos.PedidoEnProduccion);
 
-            if (updateableData != null)
+            if (updateableData != null && !ComprobarDatosNull())
             {
                 _listaFiltrada[_listaFiltrada.IndexOf(updateableData)] = _datosRecibidos;
             }
@@ -322,6 +322,20 @@ namespace VisorPedidos
             MostrarMensajeStandBy = false;
             _timerStandBy.Stop();
             _timerStandBy.Start();
+        }
+
+        private bool ComprobarDatosNull()
+        {
+            bool b = true;
+            if (string.IsNullOrWhiteSpace(_datosRecibidos.Linea)) { b = false; }
+            if (string.IsNullOrWhiteSpace(_datosRecibidos.ParcialEmbalado)) { b = false; }
+            if (string.IsNullOrWhiteSpace(_datosRecibidos.ParcialTest)) { b = false; }
+            if (string.IsNullOrWhiteSpace(_datosRecibidos.PedidoEnProduccion)) { b = false; }
+            if (string.IsNullOrWhiteSpace(_datosRecibidos.Supervisor)) { b = false; }
+            if (string.IsNullOrWhiteSpace(_datosRecibidos.TotalUnidadesPedido)) { b = false; }
+            if (string.IsNullOrWhiteSpace(_datosRecibidos.UnidadesEmbaladas)) { b = false; }
+            if (string.IsNullOrWhiteSpace(_datosRecibidos.UnidadesTesteadas)) { b = false; }
+            return b;
         }
 
         /// <summary>
