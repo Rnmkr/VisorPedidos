@@ -299,7 +299,7 @@ namespace VisorPedidos
 
             if (updateableData != null)
             {
-                if (!ComprobarDatosNull())
+                if (ComprobarDatosNull())
                 {
                     _listaFiltrada[_listaFiltrada.IndexOf(updateableData)] = _datosRecibidos;
                 }
