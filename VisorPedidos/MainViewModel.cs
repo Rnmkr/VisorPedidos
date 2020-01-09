@@ -297,9 +297,12 @@ namespace VisorPedidos
 
             var updateableData = _listaFiltrada.FirstOrDefault(r => r.PedidoEnProduccion == _datosRecibidos.PedidoEnProduccion);
 
-            if (updateableData != null && !ComprobarDatosNull())
+            if (updateableData != null)
             {
-                _listaFiltrada[_listaFiltrada.IndexOf(updateableData)] = _datosRecibidos;
+                if (!ComprobarDatosNull())
+                {
+                    _listaFiltrada[_listaFiltrada.IndexOf(updateableData)] = _datosRecibidos;
+                }
             }
             else
             {
@@ -335,6 +338,7 @@ namespace VisorPedidos
             if (string.IsNullOrWhiteSpace(_datosRecibidos.TotalUnidadesPedido)) { b = false; }
             if (string.IsNullOrWhiteSpace(_datosRecibidos.UnidadesEmbaladas)) { b = false; }
             if (string.IsNullOrWhiteSpace(_datosRecibidos.UnidadesTesteadas)) { b = false; }
+            if (_datosRecibidos.UnidadesTesteadas == "0") { b = false; }
             return b;
         }
 
