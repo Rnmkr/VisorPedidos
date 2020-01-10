@@ -292,6 +292,7 @@ namespace VisorPedidos
         {
             if (_datosRecibidos == null) return;
             if (!_lineasConfiguradas.Contains(_datosRecibidos.Linea)) return;
+            if (!ComprobarDatosNull()) return;
 
             _listaFiltrada.RemoveAll(r => r.PedidoEnProduccion == _datosRecibidos.PedidoAnterior);
 
@@ -299,10 +300,7 @@ namespace VisorPedidos
 
             if (updateableData != null)
             {
-                if (ComprobarDatosNull())
-                {
-                    _listaFiltrada[_listaFiltrada.IndexOf(updateableData)] = _datosRecibidos;
-                }
+                _listaFiltrada[_listaFiltrada.IndexOf(updateableData)] = _datosRecibidos;
             }
             else
             {
