@@ -200,7 +200,7 @@ namespace VisorPedidos
                             _lineasConfiguradas.Add(c.Value);
                             break;
 
-                        case "ipmulticast":
+                        case "ip":
                             _ipMulticast = c.Value;
                             break;
 
@@ -225,10 +225,10 @@ namespace VisorPedidos
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error cargando los valores iniciales." + Environment.NewLine + "No se puede iniciar la aplicación."
+                System.Windows.MessageBox.Show("Error cargando los valores iniciales." + Environment.NewLine + "No se puede iniciar la aplicación."
                      + Environment.NewLine + e.ToString(), "Visor de Pedidos", MessageBoxButton.OK, MessageBoxImage.Error);
 
-                Application.Current.Shutdown();
+                System.Windows.Application.Current.Shutdown();
             }
         }
 
@@ -258,12 +258,12 @@ namespace VisorPedidos
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Error en cliente UDP." + Environment.NewLine + "La aplicación se cerrará."
+                    System.Windows.MessageBox.Show("Error en cliente UDP." + Environment.NewLine + "La aplicación se cerrará."
                          + Environment.NewLine + e.ToString(), "Visor de Pedidos", MessageBoxButton.OK, MessageBoxImage.Error);
 
                     Dispatcher.CurrentDispatcher.Invoke(() =>
                     {
-                        Application.Current.Shutdown(); //no funciona
+                        System.Windows.Application.Current.Shutdown(); //no funciona
                     });
                 }
             });
@@ -357,7 +357,6 @@ namespace VisorPedidos
             DatosEnPantalla = _listaFiltrada[_indiceDatosEnPantalla];
             _indiceDatosEnPantalla++;
         }
-
 
         private void TimerRotacionTick(Object source, ElapsedEventArgs e)
         {

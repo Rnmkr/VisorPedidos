@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Forms;
 
 namespace VisorPedidos
 {
@@ -9,7 +10,15 @@ namespace VisorPedidos
     {
         public MainWindow()
         {
+            SetScreen();
             InitializeComponent();
+        }
+
+        private void SetScreen()
+        {
+            Screen targetScreen = (Screen.AllScreens.Length > 1) ? Screen.AllScreens[1] : Screen.AllScreens[0];
+            this.Top = targetScreen.WorkingArea.Y;
+            this.Left = targetScreen.WorkingArea.X;
         }
     }
 }

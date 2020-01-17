@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:VisorPedidos"
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920" MinHeight="1080" MinWidth="1920"
-        ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen"
-        WindowStyle="None" WindowState="Maximized" Cursor="None" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" >
+        ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="Manual"
+        WindowStyle="None" Cursor="None" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" >
     <Window.DataContext>
         <local:MainViewModel/>
     </Window.DataContext>
