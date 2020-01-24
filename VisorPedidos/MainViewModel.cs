@@ -11,6 +11,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using VisorDataLibrary;
@@ -36,6 +37,7 @@ namespace VisorPedidos
         private bool _pedidoCompletado;
         private bool _mostrarDatos = false;
         private bool _mostrarMensajeStandBy = true;
+        private Brush _colorEstadoPedido = Brushes.White;
 
         public MainViewModel()
         {
@@ -74,9 +76,20 @@ namespace VisorPedidos
             }
         }
 
+        public Brush ColorEstadoPedido
+        {
+            get { return _colorEstadoPedido; }
+            set
+            {
+                _colorEstadoPedido = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public bool MostrarDatos
         {
-            get { return _mostrarDatos; }
+            //get { return _mostrarDatos; }
+            get { return true; }
             set
             {
                 _mostrarDatos = value;
@@ -175,6 +188,15 @@ namespace VisorPedidos
             MostrarParciales = false;
             if (DatosEnPantalla.ParcialTest != DatosEnPantalla.TotalUnidadesPedido) { MostrarParciales = true; }
             if (DatosEnPantalla.ParcialEmbalado != DatosEnPantalla.TotalUnidadesPedido) { MostrarParciales = true; }
+
+            if (DatosEnPantalla.EstadoPedido == "FALTANTES")
+            {
+                ColorEstadoPedido = Brushes.Red;
+            }
+            else
+            {
+                ColorEstadoPedido = Brushes.Lime;
+            }
         }
 
         private void CargarConfiguracion()
