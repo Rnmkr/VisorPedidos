@@ -88,8 +88,8 @@ namespace VisorPedidos
 
         public bool MostrarDatos
         {
-            //get { return _mostrarDatos; }
-            get { return true; }
+            get { return _mostrarDatos; }
+            //get { return true; }
             set
             {
                 _mostrarDatos = value;
