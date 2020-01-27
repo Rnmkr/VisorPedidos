@@ -13,11 +13,19 @@
             </Style.Triggers>
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect ShadowDepth="3" Direction="315" Color="Black" Opacity="0.7" BlurRadius="4"/>
+                    <!--<DropShadowEffect ShadowDepth="3" Direction="315" Color="Black" Opacity="0.7" BlurRadius="4"/>-->
+                    <DropShadowEffect ShadowDepth="3" Direction="225" Color="Black" Opacity="1" BlurRadius="3"/>
                 </Setter.Value>
             </Setter>
-
         </Style>
+
+        <Style x:Key="OpacityEffect2" TargetType="{x:Type FrameworkElement}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" Value="True">
+                    <Setter Property="Opacity" Value="0.5"/>
+                </DataTrigger>
+            </Style.Triggers>
+    </Style>
 
     </Application.Resources>
 </Application>
