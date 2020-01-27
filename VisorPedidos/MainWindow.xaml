@@ -77,9 +77,9 @@
             
             <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="10">
 
-                <Border CornerRadius="32,0,0,32" BorderThickness="1" Padding="0" Background="SlateGray">
+                <Border CornerRadius="64,0,0,64" BorderThickness="1" Padding="0" Background="SlateGray">
                     <Border.Effect>
-                        <DropShadowEffect ShadowDepth="3" Direction="225" Color="Black" Opacity="0.5" BlurRadius="3"/>
+                        <DropShadowEffect ShadowDepth="10" Direction="225" Color="Black" Opacity="0.7" BlurRadius="5"/>
                     </Border.Effect>
 
                     <StackPanel Orientation="Vertical" Margin="0" Width="608" Height="720">
@@ -107,9 +107,9 @@
 
             <Grid Grid.Column="1" Grid.Row="10" Grid.RowSpan="6" >
                 
-                <Border CornerRadius="32,0,0,32" BorderThickness="1" Padding="0" Background="SlateGray">
+                <Border CornerRadius="48,0,0,48" BorderThickness="1" Padding="0" Background="SlateGray">
                     <Border.Effect>
-                        <DropShadowEffect ShadowDepth="3" Direction="225" Color="Black" Opacity="0.5" BlurRadius="3"/>
+                        <DropShadowEffect ShadowDepth="10" Direction="225" Color="Black" Opacity="0.7" BlurRadius="5"/>
                     </Border.Effect>
 
                     <StackPanel Orientation="Vertical" Margin="0" Width="608" Height="360">
