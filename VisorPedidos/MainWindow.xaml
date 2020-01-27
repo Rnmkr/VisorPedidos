@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920" MinHeight="1080" MinWidth="1920"
         ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="Manual"
-        WindowStyle="None" Cursor="None" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" >
+        WindowStyle="None" Cursor="None" Background="{x:Null}" >
     <Window.DataContext>
         <local:MainViewModel/>
     </Window.DataContext>
@@ -18,7 +18,7 @@
 
     <Grid>
 
-        <Grid Background="Black" Visibility="{Binding MostrarDatos, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <Grid Background="SlateGray" Visibility="{Binding MostrarDatos, Converter={StaticResource BooleanToVisibilityConverter}}">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -44,18 +44,18 @@
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
 
-            <Label Content="EN PRODUCCIÓN" Grid.Column="0" Grid.ColumnSpan="1" Foreground="#FF404040" Margin="0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" FontFamily="Arial Black" FontSize="18" Background="{x:Null}"/>
+            <Label Content="EN PRODUCCIÓN" Style="{StaticResource OpacityEffect}" Grid.Column="0" Grid.ColumnSpan="1" Foreground="#A3404040" Margin="0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" FontFamily="Arial Black" FontSize="18" Background="{x:Null}"/>
             <Label Content="{Binding DatosEnPantalla.PedidoEnProduccion, FallbackValue=-----------, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource OpacityEffect}" Tag="{Binding PedidoCompletado}" Foreground="White" Margin="0" Grid.Row="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" FontSize="168" Grid.RowSpan="2" FontFamily="Arial Black"/>
 
             <StackPanel Style="{StaticResource OpacityEffect}" Tag="{Binding PedidoCompletado}" Orientation="Vertical" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,60,0" >
-                <Label Content="TOTAL" Foreground="#FF404040" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" FontFamily="Arial Black" FontSize="18" Background="{x:Null}" Padding="0"/>
+                <Label Content="TOTAL" Style="{StaticResource OpacityEffect}" Foreground="#A3404040" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" FontFamily="Arial Black" FontSize="18" Background="{x:Null}" Padding="0"/>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="x" Foreground="White" Margin="0" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontFamily="Arial Black" Padding="0"/>
                     <Label Content="{Binding DatosEnPantalla.TotalUnidadesPedido, FallbackValue=----, UpdateSourceTrigger=PropertyChanged}" Foreground="White" Margin="0" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" FontFamily="Arial Black" Padding="0"/>
                 </StackPanel>
             </StackPanel>
 
-            <Label Content="TESTEADO" Foreground="#FF404040" Grid.Row="2" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0" FontFamily="Arial Black" FontSize="18" Background="{x:Null}"/>
+            <Label Content="TESTEADO" Style="{StaticResource OpacityEffect}" Foreground="#A3404040" Grid.Row="2" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0" FontFamily="Arial Black" FontSize="18" Background="{x:Null}"/>
             <DockPanel Style="{StaticResource OpacityEffect}" Tag="{Binding TesteoCompletado}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.RowSpan="7">
                 <Label Content="{Binding DatosEnPantalla.UnidadesTesteadas, FallbackValue=----, UpdateSourceTrigger=PropertyChanged}"  Foreground="Yellow" Margin="0" HorizontalContentAlignment="Center" FontSize="360" Grid.RowSpan="1" Grid.Row="1" VerticalContentAlignment="Center" Padding="5" FontStretch="Condensed" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" FontFamily="Arial Black"/>
                 <Label Content="/" Visibility="{Binding MostrarParciales, Converter={StaticResource BooleanToVisibilityConverter}}"  Foreground="Yellow" Grid.Row="3" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="0" Background="{x:Null}" Margin="0" FontFamily="Arial Black"/>
@@ -63,7 +63,7 @@
             </DockPanel>
             <Label Content="{Binding DatosEnPantalla.TesteadoresDesignados, FallbackValue=-------------------------------------------------------, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource OpacityEffect}" Tag="{Binding TesteoCompletado}" Foreground="Yellow" Grid.Row="8" FontWeight="Bold" FontSize="24" Grid.Column="0" Grid.RowSpan="1" Margin="0" HorizontalContentAlignment="Center" FontFamily="Arial Black" VerticalContentAlignment="Center"/>
 
-            <Label Content="EMBALADO" Foreground="#FF404040" Grid.Row="9" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="0" Margin="0" FontFamily="Arial Black" FontSize="18"/>
+            <Label Content="EMBALADO" Style="{StaticResource OpacityEffect}" Foreground="#A3404040" Grid.Row="9" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="0" Margin="0" FontFamily="Arial Black" FontSize="18"/>
             <DockPanel Style="{StaticResource OpacityEffect}" Tag="{Binding EmbaladoCompletado}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="9" Grid.RowSpan="7">
                 <Label Content="{Binding DatosEnPantalla.UnidadesEmbaladas, FallbackValue=----, UpdateSourceTrigger=PropertyChanged}" Foreground="Lime" Margin="0" HorizontalContentAlignment="Center" FontSize="360" Grid.RowSpan="1" Grid.Row="1" VerticalContentAlignment="Center" Padding="5" FontStretch="Condensed" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" FontFamily="Arial Black"/>
                 <Label Content="/" Visibility="{Binding MostrarParciales, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="Lime" Grid.Row="3" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="0" Background="{x:Null}" Margin="0" FontFamily="Arial Black"/>
@@ -71,41 +71,41 @@
             </DockPanel>
             <Label Content="{Binding DatosEnPantalla.EmbaladoresDesignados, FallbackValue=-------------------------------------------------------, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource OpacityEffect}" Tag="{Binding EmbaladoCompletado}" Foreground="Lime" Grid.Row="15" FontWeight="Bold" FontSize="24" Grid.Column="0" Grid.RowSpan="1" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Arial Black"/>
 
-            <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="10" Background="#FF202020">
+            <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="10" Background="White">
 
                 <StackPanel Style="{StaticResource OpacityEffect}" Tag="{Binding PedidoCompletado}" Orientation="Vertical" Margin="0" Width="608" Height="720" >
-                   
-                    <Label Content="PRODUCTO" Foreground="#FF404040" Margin="0" FontWeight="Bold" VerticalContentAlignment="Center" FontFamily="Arial Black" FontSize="18" HorizontalContentAlignment="Center"/>
-                    <Label Content="{Binding DatosEnPantalla.Producto, FallbackValue=--------------------, UpdateSourceTrigger=PropertyChanged}" Foreground="White" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Arial Black" Margin="0"/>
 
-                    <Label Content="MODELO" Foreground="#FF404040" FontWeight="Bold" VerticalContentAlignment="Center" FontFamily="Arial Black" FontSize="18" HorizontalContentAlignment="Center"/>
-                    <Label Content="{Binding DatosEnPantalla.Modelo, FallbackValue=--------------------, UpdateSourceTrigger=PropertyChanged}" Foreground="White" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Arial Black"/>
+                    <Label Content="PRODUCTO" Foreground="#A3404040" Margin="0" FontWeight="Bold" VerticalContentAlignment="Center" FontFamily="Arial Black" FontSize="18" HorizontalContentAlignment="Center" Background="{x:Null}"/>
+                    <Label Content="{Binding DatosEnPantalla.Producto, FallbackValue=--------------------, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Arial Black" Margin="0" Background="{x:Null}"/>
 
-                    <Label Content="ESTADO" Foreground="#FF404040" FontWeight="Bold" VerticalContentAlignment="Center" FontFamily="Arial Black" FontSize="18" HorizontalContentAlignment="Center"/>
-                    <Label Content="{Binding DatosEnPantalla.EstadoPedido, FallbackValue=--------------------, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding ColorEstadoPedido, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Arial Black" OpacityMask="White"/>
-                    
-                    <Label Content="ULTIMAS TESTEADAS" Style="{StaticResource OpacityEffect}" Tag="{Binding TesteoCompletado}" Foreground="Yellow" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" FontFamily="Arial Black" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                    <TextBlock TextWrapping="Wrap" Style="{StaticResource OpacityEffect}" Tag="{Binding TesteoCompletado}" Text="{Binding DatosEnPantalla.UltimasTesteadas, FallbackValue=-----------, UpdateSourceTrigger=PropertyChanged}" Foreground="White" FontWeight="Bold" FontSize="36" FontFamily="Arial Black" Height="124" Margin="0" HorizontalAlignment="Center"/>
+                    <Label Content="MODELO" Foreground="#A3404040" FontWeight="Bold" VerticalContentAlignment="Center" FontFamily="Arial Black" FontSize="18" HorizontalContentAlignment="Center" Background="{x:Null}"/>
+                    <Label Content="{Binding DatosEnPantalla.Modelo, FallbackValue=--------------------, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Arial Black" Background="{x:Null}"/>
 
-                    <Label Content="ULTIMAS EMBALADAS" Style="{StaticResource OpacityEffect}" Tag="{Binding EmbaladoCompletado}" Foreground="Lime" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" FontFamily="Arial Black" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                    <TextBlock TextWrapping="Wrap" Style="{StaticResource OpacityEffect}" Tag="{Binding EmbaladoCompletado}" Text="{Binding DatosEnPantalla.UltimasEmbaladas, FallbackValue=-----------, UpdateSourceTrigger=PropertyChanged}" Foreground="White" FontWeight="Bold" FontSize="36" FontFamily="Arial Black" HorizontalAlignment="Center" Margin="0" Height="124"/>
+                    <Label Content="ESTADO" Foreground="#A3404040" FontWeight="Bold" VerticalContentAlignment="Center" FontFamily="Arial Black" FontSize="18" HorizontalContentAlignment="Center" Background="{x:Null}"/>
+                    <Label Content="{Binding DatosEnPantalla.EstadoPedido, FallbackValue=--------------------, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding ColorEstadoPedido}" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Arial Black" OpacityMask="White"/>
+
+                    <Label Content="ULTIMAS TESTEADAS" Style="{StaticResource OpacityEffect}" Tag="{Binding TesteoCompletado}" Foreground="Yellow" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" FontFamily="Arial Black" Margin="0,10,0,0" Background="{x:Null}"/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource OpacityEffect}" Tag="{Binding TesteoCompletado}" Text="{Binding DatosEnPantalla.UltimasTesteadas, FallbackValue=-----------, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontWeight="Bold" FontSize="36" FontFamily="Arial Black" Height="124" Margin="0" HorizontalAlignment="Center"/>
+
+                    <Label Content="ULTIMAS EMBALADAS" Style="{StaticResource OpacityEffect}" Tag="{Binding EmbaladoCompletado}" Foreground="Lime" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" FontFamily="Arial Black" Margin="0,10,0,0" Background="{x:Null}"/>
+                    <TextBlock TextWrapping="Wrap" Style="{StaticResource OpacityEffect}" Tag="{Binding EmbaladoCompletado}" Text="{Binding DatosEnPantalla.UltimasEmbaladas, FallbackValue=-----------, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontWeight="Bold" FontSize="36" FontFamily="Arial Black" HorizontalAlignment="Center" Margin="0" Height="124"/>
 
                 </StackPanel>
-                
+
             </Grid>
 
-            <Grid Grid.Column="1" Grid.Row="10" Grid.RowSpan="6" Background="#FF202020" >
+            <Grid Grid.Column="1" Grid.Row="10" Grid.RowSpan="6" Background="White" >
 
-                <StackPanel Style="{StaticResource OpacityEffect}" Tag="{Binding PedidoCompletado}" Orientation="Vertical" Margin="0" Width="608" Height="420">
+                <StackPanel Style="{StaticResource OpacityEffect}" Tag="{Binding PedidoCompletado}" Orientation="Vertical" Margin="0" Width="608" Height="360">
 
-                    <Label Content="SUPERVISOR" Foreground="#FF404040" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" FontFamily="Arial Black" Background="{x:Null}"/>
-                    <Label Content="{Binding DatosEnPantalla.Supervisor, FallbackValue=------------------------, UpdateSourceTrigger=PropertyChanged}" Foreground="White" FontWeight="Bold" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Arial Black"/>
+                    <Label Content="SUPERVISOR" Foreground="#A3404040" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" FontFamily="Arial Black" Background="{x:Null}"/>
+                    <Label Content="{Binding DatosEnPantalla.Supervisor, FallbackValue=------------------------, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontWeight="Bold" FontSize="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Arial Black" Background="{x:Null}"/>
 
-                    <Label Content="ANTERIOR" Foreground="#FF404040" FontWeight="Bold" VerticalContentAlignment="Center" FontFamily="Arial Black" FontSize="18" HorizontalContentAlignment="Center" Margin="0,10,0,0"/>
-                    <Label Content="{Binding DatosEnPantalla.PedidoAnterior, FallbackValue=-----------, UpdateSourceTrigger=PropertyChanged}" Foreground="White" FontWeight="Bold" FontSize="72" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5" FontFamily="Arial Black" Margin="0"/>
+                    <Label Content="ANTERIOR" Foreground="#A3404040" FontWeight="Bold" VerticalContentAlignment="Center" FontFamily="Arial Black" FontSize="18" HorizontalContentAlignment="Center" Margin="0,10,0,0" Background="{x:Null}"/>
+                    <Label Content="{Binding DatosEnPantalla.PedidoAnterior, FallbackValue=-----------, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontWeight="Bold" FontSize="72" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5" FontFamily="Arial Black" Margin="0" Background="{x:Null}"/>
 
-                    <Label Content="SIGUIENTE" Foreground="#FF404040" Margin="0" FontWeight="Bold" VerticalContentAlignment="Center" Grid.Column="1" FontSize="18" FontFamily="Arial Black" HorizontalContentAlignment="Center"/>
-                    <Label Content="{Binding DatosEnPantalla.PedidoSiguiente, FallbackValue=-----------, UpdateSourceTrigger=PropertyChanged}" Foreground="White" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Center" Padding="5" VerticalContentAlignment="Center" FontFamily="Arial Black" Margin="0" VerticalAlignment="Bottom"/>
+                    <Label Content="SIGUIENTE" Foreground="#A3404040" Margin="0" FontWeight="Bold" VerticalContentAlignment="Center" Grid.Column="1" FontSize="18" FontFamily="Arial Black" HorizontalContentAlignment="Center" Background="{x:Null}"/>
+                    <Label Content="{Binding DatosEnPantalla.PedidoSiguiente, FallbackValue=-----------, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Center" Padding="5" VerticalContentAlignment="Center" FontFamily="Arial Black" Margin="0" VerticalAlignment="Bottom" Background="{x:Null}"/>
 
                 </StackPanel>
 
@@ -123,9 +123,9 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="15">
-            <TextBlock Text="LINEA: " Foreground="#FF404040" Margin="0,0,3,0" FontWeight="Bold" FontSize="18" FontFamily="Arial Black"/>
-            <TextBlock Text="{Binding DatosEnPantalla.Linea, FallbackValue=--, UpdateSourceTrigger=PropertyChanged}" Foreground="#FF404040" Margin="0,0,10,0" FontWeight="Bold" FontSize="18" FontFamily="Arial Black"/>
-            <TextBlock Text="{Binding VersionAplicacion, FallbackValue=--.--.--.--, Mode=OneTime}" Foreground="#FF404040" Margin="0,0,10,0" FontWeight="Bold" FontSize="18" FontFamily="Arial Black" />
+            <TextBlock Text="LINEA: " Foreground="#A3404040" Margin="0,0,3,0" FontWeight="Bold" FontSize="18" FontFamily="Arial Black"/>
+            <TextBlock Text="{Binding DatosEnPantalla.Linea, FallbackValue=--, UpdateSourceTrigger=PropertyChanged}" Foreground="#A3404040" Margin="0,0,10,0" FontWeight="Bold" FontSize="18" FontFamily="Arial Black"/>
+            <TextBlock Text="{Binding VersionAplicacion, FallbackValue=--.--.--.--, Mode=OneTime}" Foreground="#A3404040" Margin="0,0,10,0" FontWeight="Bold" FontSize="18" FontFamily="Arial Black" />
         </StackPanel>
     </Grid>
 

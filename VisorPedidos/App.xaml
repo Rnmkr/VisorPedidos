@@ -11,6 +11,12 @@
                     <Setter Property="Opacity" Value="0.5"/>
                 </DataTrigger>
             </Style.Triggers>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="3" Direction="315" Color="Black" Opacity="0.5" BlurRadius="4"/>
+                </Setter.Value>
+            </Setter>
+
         </Style>
 
     </Application.Resources>
