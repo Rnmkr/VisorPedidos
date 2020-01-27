@@ -8,7 +8,7 @@
         <Style x:Key="OpacityEffect" TargetType="{x:Type FrameworkElement}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                    <Setter Property="Opacity" Value="0.5"/>
+                    <Setter Property="Opacity" Value="0.7"/>
                 </DataTrigger>
             </Style.Triggers>
             <Setter Property="Effect">
