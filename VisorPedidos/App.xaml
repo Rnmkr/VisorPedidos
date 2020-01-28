@@ -8,13 +8,12 @@
         <Style x:Key="OpacityEffect" TargetType="{x:Type FrameworkElement}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                    <Setter Property="Opacity" Value="0.7"/>
+                    <Setter Property="Opacity" Value="0.6"/>
                 </DataTrigger>
             </Style.Triggers>
             <Setter Property="Effect">
                 <Setter.Value>
-                    <!--<DropShadowEffect ShadowDepth="3" Direction="315" Color="Black" Opacity="0.7" BlurRadius="4"/>-->
-                    <DropShadowEffect ShadowDepth="3" Direction="225" Color="Black" Opacity="1" BlurRadius="3"/>
+                    <DropShadowEffect ShadowDepth="10" Direction="225" Color="Black" Opacity="0.7" BlurRadius="5"/>
                 </Setter.Value>
             </Setter>
         </Style>
@@ -22,10 +21,16 @@
         <Style x:Key="OpacityEffect2" TargetType="{x:Type FrameworkElement}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource Self}}" Value="True">
-                    <Setter Property="Opacity" Value="0.5"/>
+                    <Setter Property="Opacity" Value="0.6"/>
                 </DataTrigger>
             </Style.Triggers>
-    </Style>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="5" Direction="225" Color="Black" Opacity="0.7" BlurRadius="3"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
     </Application.Resources>
+    
 </Application>
