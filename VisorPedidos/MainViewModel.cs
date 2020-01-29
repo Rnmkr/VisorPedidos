@@ -196,7 +196,7 @@ namespace VisorPedidos
                     break;
 
                 case "EN PROCESO":
-                    ColorEstadoPedido = Brushes.Red;
+                    ColorEstadoPedido = Brushes.Lime;
                     break;
 
                 default:
