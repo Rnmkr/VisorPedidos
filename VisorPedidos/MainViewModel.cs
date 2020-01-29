@@ -170,7 +170,7 @@ namespace VisorPedidos
             }
             else
             {
-                EmbaladoCompletado = false; 
+                EmbaladoCompletado = false;
             }
 
             if (testeadas >= parcialtesteado)
@@ -189,14 +189,21 @@ namespace VisorPedidos
             if (DatosEnPantalla.ParcialTest != DatosEnPantalla.TotalUnidadesPedido) { MostrarParciales = true; }
             if (DatosEnPantalla.ParcialEmbalado != DatosEnPantalla.TotalUnidadesPedido) { MostrarParciales = true; }
 
-            if (DatosEnPantalla.EstadoPedido == "FALTANTES")
+            switch (_datosEnPantalla.EstadoPedido)
             {
-                ColorEstadoPedido = Brushes.Red;
+                case "FALTANTES":
+                    ColorEstadoPedido = Brushes.Red;
+                    break;
+
+                case "EN PROCESO":
+                    ColorEstadoPedido = Brushes.Red;
+                    break;
+
+                default:
+                    ColorEstadoPedido = Brushes.White;
+                    break;
             }
-            else
-            {
-                ColorEstadoPedido = Brushes.Lime;
-            }
+
         }
 
         private void CargarConfiguracion()
