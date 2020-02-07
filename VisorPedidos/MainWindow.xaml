@@ -71,10 +71,10 @@
             </DockPanel>
             <Label Content="{Binding DatosEnPantalla.EmbaladoresDesignados, FallbackValue=-------------------------------------------------------, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource OpacityEffect2}" Tag="{Binding EmbaladoCompletado}" Foreground="Lime" Grid.Row="15" FontWeight="Bold" FontSize="24" Grid.Column="0" Grid.RowSpan="1" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Arial Black"/>
 
-            
-            
-            
-            
+
+
+
+
             <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="10">
 
                 <Border CornerRadius="32,0,0,32" BorderThickness="1" Padding="0" Background="SlateGray">
@@ -106,7 +106,7 @@
             </Grid>
 
             <Grid Grid.Column="1" Grid.Row="10" Grid.RowSpan="6" >
-                
+
                 <Border CornerRadius="32,0,0,32" BorderThickness="1" Padding="0" Background="SlateGray">
                     <Border.Effect>
                         <DropShadowEffect ShadowDepth="10" Direction="225" Color="Black" Opacity="0.7" BlurRadius="5"/>
@@ -123,17 +123,26 @@
                         <Label Content="SIGUIENTE" Style="{x:Null}" Foreground="#A3404040" Margin="0" FontWeight="Bold" VerticalContentAlignment="Center" Grid.Column="1" FontSize="18" FontFamily="Arial Black" HorizontalContentAlignment="Center" />
                         <Label Content="{Binding DatosEnPantalla.PedidoSiguiente, FallbackValue=-----------, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource OpacityEffect2}" Foreground="Gainsboro" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Center" Padding="5" VerticalContentAlignment="Center" FontFamily="Arial Black" Margin="0" VerticalAlignment="Bottom"/>
 
-                </StackPanel>
-                
+                    </StackPanel>
+
                 </Border>
             </Grid>
-       
-        <Image Source="pack://application:,,,/VisorPedidos;component/Resources/Finalizado1312x1080.png" Visibility="{Binding PedidoCompletado, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="0" Grid.RowSpan="16" Grid.Column="0" Opacity="1"  Style="{StaticResource OpacityEffect}"/>
-        
+
+
         </Grid>
         
-
-        <StackPanel Visibility="{Binding MostrarMensajeStandBy, Converter={StaticResource BooleanToVisibilityConverter}}" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid>
+           
+            <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="608"/>
+            </Grid.ColumnDefinitions>
+            
+            <Image Source="pack://application:,,,/VisorPedidos;component/Resources/Finalizado1312x1080_green.png" Visibility="{Binding PedidoCompletado, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="0" Grid.RowSpan="16" Grid.Column="0" Opacity="1"  Style="{StaticResource OpacityEffect}"/>
+        
+        </Grid>
+    
+    <StackPanel Visibility="{Binding MostrarMensajeStandBy, Converter={StaticResource BooleanToVisibilityConverter}}" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Image Source="pack://application:,,,/VisorPedidos;component/Resources/Desconectado256x256.png" Width="256" Height="256" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <Label Margin="0" Content="DESCONECTADO" Foreground="Red" FontSize="200" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" />
             <Label Margin="0" Content="EL TERMINAL DE EMBALADO DEBE CONECTARSE A LA RED" Foreground="Red" FontSize="48" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />

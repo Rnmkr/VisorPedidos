@@ -73,9 +73,9 @@ namespace VisorPedidos.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Finalizado1312x1080 {
+        internal static System.Drawing.Bitmap Finalizado1312x1080_green {
             get {
-                object obj = ResourceManager.GetObject("Finalizado1312x1080", resourceCulture);
+                object obj = ResourceManager.GetObject("Finalizado1312x1080_green", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -89,7 +89,7 @@ namespace VisorPedidos.Properties {
         ///	&lt;linea&gt;03&lt;/linea&gt;
         ///	&lt;linea&gt;04&lt;/linea&gt;
         ///	&lt;linea&gt;05&lt;/linea&gt;
-        ///	&lt;ipmulticast&gt;239.239.239.239&lt;/ipmulticast&gt;
+        ///	&lt;ip&gt;239.239.239.239&lt;/ip&gt;
         ///	&lt;puerto&gt;7001&lt;/puerto&gt;
         ///	&lt;segundosrotacion&gt;7&lt;/segundosrotacion&gt;
         ///	&lt;minutosstandby&gt;5&lt;/minutosstandby&gt;

@@ -183,7 +183,6 @@ namespace VisorPedidos
                 TesteoCompletado = false;
             }
 
-            if (TesteoCompletado == true && EmbaladoCompletado == true) { PedidoCompletado = true; } else { PedidoCompletado = false; }
 
             MostrarParciales = false;
             if (DatosEnPantalla.ParcialTest != DatosEnPantalla.TotalUnidadesPedido) { MostrarParciales = true; }
@@ -193,10 +192,12 @@ namespace VisorPedidos
             {
                 case "FALTANTES":
                     ColorEstadoPedido = Brushes.Red;
+                    PedidoCompletado = false;
                     break;
 
                 case "EN PROCESO":
                     ColorEstadoPedido = Brushes.Lime;
+                    if (TesteoCompletado == true && EmbaladoCompletado == true) { PedidoCompletado = true; }
                     break;
 
                 default:
