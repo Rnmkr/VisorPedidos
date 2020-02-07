@@ -130,17 +130,8 @@
 
 
         </Grid>
-        
-        <Grid>
            
-            <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="608"/>
-            </Grid.ColumnDefinitions>
-            
-            <Image Source="pack://application:,,,/VisorPedidos;component/Resources/Finalizado1312x1080_green.png" Visibility="{Binding PedidoCompletado, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="0" Grid.RowSpan="16" Grid.Column="0" Opacity="1"  Style="{StaticResource OpacityEffect}"/>
-        
-        </Grid>
+        <Image Source="pack://application:,,,/VisorPedidos;component/Resources/Finalizado1312x1080_green.png" Visibility="{Binding PedidoCompletado, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="0" Grid.RowSpan="16" Grid.Column="0" Opacity="1"  Style="{StaticResource OpacityEffect}" HorizontalAlignment="Left"/>
     
     <StackPanel Visibility="{Binding MostrarMensajeStandBy, Converter={StaticResource BooleanToVisibilityConverter}}" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Image Source="pack://application:,,,/VisorPedidos;component/Resources/Desconectado256x256.png" Width="256" Height="256" VerticalAlignment="Center" HorizontalAlignment="Center"/>
