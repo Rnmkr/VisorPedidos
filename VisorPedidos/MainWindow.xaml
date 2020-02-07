@@ -120,9 +120,13 @@
                         <Label Content="ANTERIOR" Style="{x:Null}" Foreground="#A3404040" FontWeight="Bold" VerticalContentAlignment="Center" FontFamily="Arial Black" FontSize="18" HorizontalContentAlignment="Center" Margin="0,10,0,0"/>
                         <Label Content="{Binding DatosEnPantalla.PedidoAnterior, FallbackValue=-----------, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource OpacityEffect2}" Foreground="Gainsboro" FontWeight="Bold" FontSize="72" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="5" FontFamily="Arial Black" Margin="0"/>
 
-                        <Label Content="SIGUIENTE" Style="{x:Null}" Foreground="#A3404040" Margin="0" FontWeight="Bold" VerticalContentAlignment="Center" Grid.Column="1" FontSize="18" FontFamily="Arial Black" HorizontalContentAlignment="Center" />
-                        <Label Content="{Binding DatosEnPantalla.PedidoSiguiente, FallbackValue=-----------, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource OpacityEffect2}" Foreground="Gainsboro" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Center" Padding="5" VerticalContentAlignment="Center" FontFamily="Arial Black" Margin="0" VerticalAlignment="Bottom"/>
-
+                        <Label Content="UNIDADES / MINUTO" Style="{x:Null}" Foreground="#A3404040" Margin="0" FontWeight="Bold" VerticalContentAlignment="Center" Grid.Column="1" FontSize="18" FontFamily="Arial Black" HorizontalContentAlignment="Center" />
+                        
+                        <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0">-->
+                        <Label Content="{Binding DatosEnPantalla.Promedio, FallbackValue=----, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource OpacityEffect2}" Foreground="Gainsboro" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Center" Padding="5" VerticalContentAlignment="Center" FontFamily="Arial Black" Margin="10" VerticalAlignment="Bottom"/>
+                        <!--<Label Content="un./min" Style="{StaticResource OpacityEffect2}" Foreground="Gainsboro" FontWeight="Bold" FontSize="36" HorizontalContentAlignment="Center" Padding="5" VerticalContentAlignment="Center" FontFamily="Arial Black" Margin="0"/>-->
+                        <!--</StackPanel>-->
+                        
                     </StackPanel>
 
                 </Border>

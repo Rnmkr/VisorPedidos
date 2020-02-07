@@ -58,7 +58,7 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="VisorDataLibrary">
-      <HintPath>..\..\..\GePro\VisorDataLibrary.dll</HintPath>
+      <HintPath>..\..\..\libraries\VisorDataLibrary.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
