@@ -197,7 +197,14 @@ namespace VisorPedidos
 
                 case "EN PROCESO":
                     ColorEstadoPedido = Brushes.Lime;
-                    if (TesteoCompletado == true && EmbaladoCompletado == true) { PedidoCompletado = true; }
+                    if (TesteoCompletado == true && EmbaladoCompletado == true)
+                    {
+                        PedidoCompletado = true;
+                    }
+                    else
+                    {
+                        PedidoCompletado = false;
+                    }
                     break;
 
                 default:
