@@ -123,7 +123,8 @@
                         <Label Content="UNIDADES / MINUTO" Style="{x:Null}" Foreground="#A3404040" Margin="0" FontWeight="Bold" VerticalContentAlignment="Center" Grid.Column="1" FontSize="18" FontFamily="Arial Black" HorizontalContentAlignment="Center" />
                         
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0">
-                        <Label Content="{Binding DatosEnPantalla.Promedio, FallbackValue=----, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource OpacityEffect2}" Foreground="Gainsboro" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Center" Padding="5" VerticalContentAlignment="Center" FontFamily="Arial Black" Margin="10" VerticalAlignment="Bottom"/>
+                        <!--<Label Content="{Binding DatosEnPantalla.Promedio, FallbackValue=····, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource OpacityEffect2}" Foreground="Gainsboro" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Center" Padding="5" VerticalContentAlignment="Center" FontFamily="Arial Black" Margin="10" VerticalAlignment="Bottom"/>-->
+                        <Label Content="--" Style="{StaticResource OpacityEffect2}" Foreground="Gainsboro" FontWeight="Bold" FontSize="72" HorizontalContentAlignment="Center" Padding="5" VerticalContentAlignment="Center" FontFamily="Arial Black" Margin="10" VerticalAlignment="Bottom"/>
                         <Label Content="/ MIN." Style="{StaticResource OpacityEffect2}" Foreground="Gainsboro" FontWeight="Bold" FontSize="36" HorizontalContentAlignment="Center" Padding="5" VerticalContentAlignment="Center" FontFamily="Arial Black" Margin="0"/>
                         </StackPanel>
                         
